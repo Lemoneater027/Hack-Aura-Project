@@ -10,8 +10,8 @@ const mockTrainers = [
         distance: '2.1 km',
         rating: 4.9,
         reviews: 156,
-        basePrice: 'Rs300/hour',
-        studentPrice: 'Rs200/hour',
+        basePrice: 'Rs300/week',
+        studentPrice: 'Rs200/week',
         image: 'https://images.unsplash.com/photo-1611884286012-cd1f44cf74e7?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         verified: true
     },
@@ -23,8 +23,8 @@ const mockTrainers = [
         distance: '3.5 km',
         rating: 4.8,
         reviews: 203,
-        basePrice: 'Rs 400/hour',
-        studentPrice: 'Rs 250/hour',
+        basePrice: 'Rs 400/week',
+        studentPrice: 'Rs 250/week',
         image: 'https://plus.unsplash.com/premium_photo-1726614172234-e35c6e66470d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D ',
         verified: true
     },
@@ -36,9 +36,49 @@ const mockTrainers = [
         distance: '4.2 km',
         rating: 4.9,
         reviews: 128,
-        basePrice: 'Rs 350/hour',
-        studentPrice: 'Rs 225/hour',
+        basePrice: 'Rs 350/week',
+        studentPrice: 'Rs 225/week',
         image: 'https://images.unsplash.com/photo-1685811985058-f53c8dfd5a6e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        verified: true
+    },
+    { 
+        id: 4,
+        name: 'Anya Rai',
+        specialization: 'Pilates Instructor',
+        Location: 'Guwahati',
+        distance: '5.0 km',
+        rating: 4.7,
+        reviews: 98,
+        basePrice: 'Rs 450/week',
+        studentPrice: 'Rs 300/week',
+        image: 'https://images.unsplash.com/photo-1566152923600-97e47240a598?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        verified: true
+
+    },
+    { 
+        id: 5,
+        name: 'Vishesh Rana',
+        specialization: 'Weightlifting Coach',
+        Location: 'Delhi',
+        distance: '4.8 km',
+        rating: 4.8,
+        reviews: 110,
+        basePrice: 'Rs 500/week',
+        studentPrice: 'Rs 275/week',
+        image: 'https://images.unsplash.com/photo-1642267374581-4a15448a4e64?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        verified: false
+    },
+    {
+        id: 6,
+        name: 'Meera Joshi',
+        specialization: 'Weightlifting Coach',
+        Location: 'Bangalore',
+        distance: '3.6 km',
+        rating: 4.9,
+        reviews: 189,
+        basePrice: 'Rs 450/week',
+        studentPrice: 'Rs 200/week',
+        image: 'https://images.unsplash.com/photo-1730126425047-63c40f038ba6?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         verified: true
     }
 ];
@@ -149,7 +189,37 @@ const mockSocialPosts = [
         shares: 12,
         timeAgo: '5 hours ago',
         tags: ['nutrition', 'smoothie']
-    }
+    },
+    {
+        id: 3,
+        user: {
+            name: ' Mohit Chauhan',
+            usename: '@mohitfit_hit',
+            image:'https://images.unsplash.com/photo-1609860862165-b851ee66977e?q=80&w=403&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        },
+        content: 'Week 3 of weightlifting with my dearest coach Meera Joshi ',
+        image:'https://images.unsplash.com/photo-1741478551868-a17b1644228d?q=80&w=748&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        likes: 54,
+        comments: 12,
+        shares: 2,
+        timeAgo: '1 week ago',
+        tags:['weightlifting','fitness']
+    },
+    {
+        id: 4,
+        user: {
+            name: 'Neha Saikia',
+            username: 'yoganeha_y',
+            image: 'https://images.unsplash.com/photo-1717500250573-a76fce75ffb3?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        },
+        content: 'Week 6 of pilates session with my sweetest instructor ANYAAAAA', 
+        image: 'https://images.unsplash.com/photo-1717500250411-9c523d269000?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',  
+        likes: 120,
+        comments: 76,
+        shares: 43,
+        timeAgo: '50 minutes ago',
+        tags:['pilates','girlpower']
+    }   
 ];
 
 // App state (shared across pages)
