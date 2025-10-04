@@ -10,9 +10,9 @@ const mockTrainers = [
         distance: '2.1 km',
         rating: 4.9,
         reviews: 156,
-        basePrice: '₹300/hour',
-        studentPrice: '₹200/hour',
-        image: 'https://images.unsplash.com/photo-1594824804732-ca8db7536926?w=300',
+        basePrice: 'Rs300/hour',
+        studentPrice: 'Rs200/hour',
+        image: 'https://images.unsplash.com/photo-1611884286012-cd1f44cf74e7?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         verified: true
     },
     {
@@ -23,22 +23,22 @@ const mockTrainers = [
         distance: '3.5 km',
         rating: 4.8,
         reviews: 203,
-        basePrice: '₹400/hour',
-        studentPrice: '₹250/hour',
-        image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300',
+        basePrice: 'Rs 400/hour',
+        studentPrice: 'Rs 250/hour',
+        image: 'https://plus.unsplash.com/premium_photo-1726614172234-e35c6e66470d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D ',
         verified: true
     },
     {
         id: 3,
         name: 'Kavya Singh',
         specialization: 'Weight Loss & Cardio',
-        location: 'Bandra East',
+        location: 'Chandigarh',
         distance: '4.2 km',
         rating: 4.9,
         reviews: 128,
-        basePrice: '₹350/hour',
-        studentPrice: '₹225/hour',
-        image: 'https://images.unsplash.com/photo-1594824804732-ca8db7536926?w=300',
+        basePrice: 'Rs 350/hour',
+        studentPrice: 'Rs 225/hour',
+        image: 'https://images.unsplash.com/photo-1685811985058-f53c8dfd5a6e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         verified: true
     }
 ];
@@ -48,11 +48,10 @@ const mockProducts = [
         id: 1,
         name: 'Student Whey Protein - Chocolate',
         brand: 'FitStudent',
-        originalPrice: '₹2,499',
-        studentPrice: '₹1,899',
+        originalPrice: 'Rs 2,499',
+        studentPrice: 'Rs 1,899',
         discount: '24% OFF',
-        image: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=300',
-        rating: 4.5,
+        image: 'https://images.unsplash.com/photo-1681298711405-54e6bc77473e?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         reviews: 234,
         inStock: true
     },
@@ -60,10 +59,10 @@ const mockProducts = [
         id: 2,
         name: 'Student Multivitamin Pack',
         brand: 'HealthyStudent',
-        originalPrice: '₹899',
-        studentPrice: '₹649',
+        originalPrice: 'Rs 899',
+        studentPrice: 'Rs 649',
         discount: '28% OFF',
-        image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300',
+        image: 'https://images.unsplash.com/photo-1704694671866-f83e0b91df09?q=80&w=971&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         rating: 4.7,
         reviews: 156,
         inStock: true
@@ -72,14 +71,52 @@ const mockProducts = [
         id: 3,
         name: 'Pre-Workout Energy Booster',
         brand: 'PowerUp',
-        originalPrice: '₹1,299',
-        studentPrice: '₹999',
-        discount: '23% OFF',
-        image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300',
+        originalPrice: 'Rs 899',
+        studentPrice: 'Rs 599',
+        discount: '33% OFF',
+        image: 'https://images.unsplash.com/photo-1595348020949-87cdfbb44174?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         rating: 4.3,
         reviews: 89,
         inStock: true
+    },
+    {
+        id: 4,
+        name: 'Yoga Mat - Non Slip',
+        brand:  'Genfit',
+        originalPrice: 'Rs 399',
+        studentPrice: 'Rs 299',
+        discount: '25% OFF',
+        image: 'https://plus.unsplash.com/premium_photo-1664536968460-738ba488545e?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        rating: 4.6,
+        reviews: 145,
+        inStock: true
+
+    },
+    {
+        id: 5,
+        name:  'Dumbbells',
+        brsnd:  'FITPRO',
+        originalPrice: 'Rs 999',
+        studentsPrice: 'Rs 799',
+        discount: '20% OFF',
+        image: 'https://images.unsplash.com/photo-1638536534847-2cb61af9efe3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        rating: 4.7,
+        reviews: 143,
+        inStock: true
+    },
+    {
+        id:6,
+        name: 'Fish oil Capsules',
+        brand: 'NutriGold',
+        originalPrice: 'Rs 599',
+        studentPrice: 'Rs 439',
+        discount: '27% OFF',
+        image:'https://images.unsplash.com/photo-1670850756988-a1943aa0e554?q=80&w=484&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        rating: 4.6,
+        reviews: 89,
+        inStock: true,
     }
+
 ];
 
 const mockSocialPosts = [
@@ -88,10 +125,10 @@ const mockSocialPosts = [
         user: {
             name: 'Rahul Gupta',
             username: '@rahul_gains',
-            image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150'
+            image: 'https://images.unsplash.com/photo-1584952449254-80c846de339d?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         },
         content: 'Week 4 of home workouts with trainer Priya! Lost 3kg and feeling stronger 💪',
-        image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
+        image: 'https://images.unsplash.com/photo-1584952449180-f8fddc0b03a3?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         likes: 34,
         comments: 8,
         shares: 5,
@@ -103,10 +140,10 @@ const mockSocialPosts = [
         user: {
             name: 'Aarya Chandra',
             username: '@aarya_fit',
-            image: 'https://images.unsplash.com/photo-1494790108755-2616b612b77c?w=150'
+            image: 'https://plus.unsplash.com/premium_photo-1675691859413-3de4d8046bdc?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         },
         content: 'Finally nailed the perfect protein smoothie recipe! Thanks to trainer Vikash 🥤',
-        image: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400',
+        image: 'https://plus.unsplash.com/premium_photo-1663853294230-0e53cddd88c8?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         likes: 67,
         comments: 15,
         shares: 12,
