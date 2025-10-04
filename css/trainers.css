@@ -20,10 +20,20 @@ nav {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary);
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;   /* adjust text size */
+  font-weight: bold;
+  color: #218085;      /* your theme color */
 }
+.logo img {
+  height: 40px;        /* logo size */
+  width: auto;
+  margin-right: 8px;   /* space between logo and text */
+  object-fit: contain;
+}
+
+
 
 .nav-links {
     display: flex;

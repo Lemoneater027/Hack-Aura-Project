@@ -193,3 +193,138 @@
         right: 1rem;
     }
 }
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    color: #555;
+    margin: 10px 0 20px 0;
+    font-size: 1.1rem;
+}
+
+.tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-tab {
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-tab:hover {
+    background-color: #e0e0e0;
+}
+
+.nav-tab.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.post-btn-wrapper {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+/* Footer */
+.footer {
+    background: #111;
+    color: #eee;
+    padding: 3rem 2rem 1rem;
+    margin-top: 3rem;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer h3, .footer h4 {
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.footer p, .footer a {
+    color: #bbb;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer a {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #00bfa6; /* match your primary color */
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    color: #bbb;
+}
+
+.social-icons a:hover {
+    color: #00bfa6;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 2rem;
+    font-size: 0.85rem;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;   /* adjust text size */
+  font-weight: bold;
+  color: #218085;      /* your theme color */
+}
+.logo img {
+  height: 40px;        /* logo size */
+  width: auto;
+  margin-right: 8px;   /* space between logo and text */
+  object-fit: contain;
+}
+
