@@ -1,0 +1,56 @@
+{
+  "name": "FitTrainer Hub - Student Fitness Platform",
+  "short_name": "FitTrainer Hub",
+  "description": "Connect with local fitness trainers, buy discounted supplements, and share your fitness journey with students.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F9FAFB",
+  "theme_color": "#218085",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%23218085' rx='20'/><text x='96' y='120' font-size='80' text-anchor='middle' fill='white'>🏋️</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23218085' rx='50'/><text x='256' y='320' font-size='200' text-anchor='middle' fill='white'>🏋️</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  
+  "categories": ["health", "fitness", "education", "lifestyle"],
+  "lang": "en-IN",
+  
+  "shortcuts": [
+    {
+      "name": "Find Trainers",
+      "short_name": "Trainers",
+      "description": "Search for local fitness trainers",
+      "url": "/#trainers",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><text y='75' font-size='70'>🔍</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Browse Store",
+      "short_name": "Store",
+      "description": "Shop supplements with student discounts",
+      "url": "/#store",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><text y='75' font-size='70'>🛒</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
