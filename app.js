@@ -5,10 +5,10 @@ const appState = {
     currentSection: 'home',
     currentUser: {
         id: 'user-123',
-        name: 'Alex Kumar',
-        username: 'alex_student',
-        email: 'alex@university.edu',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
+        name: 'Ravi Kumar',
+        username: 'ravi_student',
+        email: 'ravi@university.edu',
+        image: 'https://images.unsplash.com/photo-1687757660309-c41415d42f9e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         university: 'Mumbai University',
         year: '2nd Year Engineering',
         fitnessGoals: ['Weight Loss', 'Build Strength'],
@@ -31,7 +31,7 @@ const mockTrainers = [
         reviews: 156,
         basePrice: '₹300/hour',
         studentPrice: '₹200/hour',
-        image: 'https://images.unsplash.com/photo-1594824804732-ca8db7536926?w=300',
+        image: 'https://images.unsplash.com/photo-1611884286012-cd1f44cf74e7?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         verified: true
     },
     {
@@ -44,7 +44,7 @@ const mockTrainers = [
         reviews: 203,
         basePrice: '₹400/hour',
         studentPrice: '₹250/hour',
-        image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300',
+        image: 'https://plus.unsplash.com/premium_photo-1726614172234-e35c6e66470d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         verified: true
     },
     {
@@ -57,7 +57,7 @@ const mockTrainers = [
         reviews: 128,
         basePrice: '₹350/hour',
         studentPrice: '₹225/hour',
-        image: 'https://images.unsplash.com/photo-1594824804732-ca8db7536926?w=300',
+        image: 'https://images.unsplash.com/photo-1685811985058-f53c8dfd5a6e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         verified: true
     }
 ];
