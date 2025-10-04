@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Trainers - FitTrainer Hub</title>
-    
-    <!-- Load CSS files -->
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/trainers.css">
-    
+
     <meta name="theme-color" content="#218085">
     <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <div class="nav-brand">
-                    <a href="index.html" class="logo">🏋️ FitTrainer Hub</a>
-                </div>
-                <div class="nav-menu">
-                    <a href="index.html" class="nav-item">Home</a>
-                    <a href="trainers.html" class="nav-item active">Trainers</a>
-                    <a href="store.html" class="nav-item">Store</a>
-                    <a href="social.html" class="nav-item">Social</a>
-                    <a href="dashboard.html" class="nav-item">Dashboard</a>
-                </div>
-                <div class="nav-profile">
-                    <div class="notification-bell" onclick="toggleNotifications()">
-                        <span class="bell-icon">🔔</span>
-                        <span class="notification-count">2</span>
-                    </div>
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Profile" class="profile-avatar">
-                    <span class="profile-name">Alex</span>
-                </div>
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">FitTrainer Hub</div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="trainers.html">Trainers</a>
+            <a href="social.html">Social</a>
+            <a href="store.html">Store</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+        <div class="nav-profile">
+            <div class="notification-bell" onclick="toggleNotifications()">
+                <span class="bell-icon">🔔</span>
+                <span class="notification-count">2</span>
             </div>
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face"
+                alt="Profile" class="profile-avatar">
+            <span class="profile-name">Alex</span>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     </nav>
 
@@ -50,12 +51,18 @@
         <a href="dashboard.html" class="nav-item">👤 Dashboard</a>
     </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
+    <!-- Hero Section: Header + Filters with BG -->
+    <div class="hero-bg">
         <div class="container">
+            <!-- Page Header -->
             <div class="page-header">
                 <h1>Find Your Perfect Trainer</h1>
                 <p>Certified professionals with student-friendly pricing</p>
+                <br>
+                <p>Achieve your fitness goals with the perfect trainer! Browse certified professionals specializing in
+                    everything from home workouts and HIIT to yoga and nutrition coaching. With flexible pricing and
+                    personalized guidance, find a trainer who fits your lifestyle and keeps you motivated every step of
+                    the way</p>
             </div>
 
             <!-- Filters -->
@@ -100,35 +107,65 @@
                         </select>
                     </div>
                 </div>
+
                 <div class="filters-actions">
                     <button class="btn btn-secondary" onclick="clearFilters()">Clear All</button>
                     <button class="btn btn-primary" onclick="filterTrainers()">Apply Filters</button>
                 </div>
             </div>
-
-            <!-- Trainers Grid -->
+        </div>
+    </div>
+    <!-- Trainers Section (Normal BG) -->
+    <main class="main-content">
+        <div class="container">
             <div class="trainers-grid" id="trainersGrid">
-                <!-- Trainers loaded by JavaScript -->
+                <!-- Trainer cards loaded by JS -->
             </div>
 
-            <!-- Load More -->
             <div class="text-center">
                 <button class="btn btn-secondary" onclick="loadMoreTrainers()">Load More Trainers</button>
             </div>
         </div>
     </main>
+        <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>FitTrainer Hub</h3>
+                <p>Your one-stop platform to connect with certified trainers, join fitness communities, 
+                   and access the best health & wellness resources.</p>
+            </div>
 
-    <!-- Include shared components -->
-    <div id="sharedComponents"></div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trainers.html">Trainers</a></li>
+                    <li><a href="social.html">Social</a></li>
+                    <li><a href="store.html">Store</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
 
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Email: support@fittrainerhub.com</p>
+                <p>Phone: +91 9394970150</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FitTrainer Hub. All Rights Reserved.</p>
+        </div>
+    </footer>
     <!-- Scripts -->
     <script src="app.js"></script>
     <script>
-        // Page-specific initialization
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initializeSharedComponents();
             loadAllTrainers();
         });
     </script>
+
 </body>
+
 </html>
