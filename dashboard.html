@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FitTrainer Hub</title>
+    
+    <!-- Load CSS files -->
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <meta name="theme-color" content="#218085">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">🏋️ FitTrainer Hub</a>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-item">Home</a>
+                    <a href="trainers.html" class="nav-item">Trainers</a>
+                    <a href="store.html" class="nav-item">Store</a>
+                    <a href="social.html" class="nav-item">Social</a>
+                    <a href="dashboard.html" class="nav-item active">Dashboard</a>
+                </div>
+                <div class="nav-profile">
+                    <div class="notification-bell" onclick="toggleNotifications()">
+                        <span class="bell-icon">🔔</span>
+                        <span class="notification-count">2</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Profile" class="profile-avatar">
+                    <span class="profile-name">Alex</span>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu hidden">
+        <a href="index.html" class="nav-item">🏠 Home</a>
+        <a href="trainers.html" class="nav-item">🏋️ Trainers</a>
+        <a href="store.html" class="nav-item">🛒 Store</a>
+        <a href="social.html" class="nav-item">👥 Social</a>
+        <a href="dashboard.html" class="nav-item">👤 Dashboard</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-info">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Profile" class="profile-image">
+                    <div class="profile-details">
+                        <h1>Alex Kumar</h1>
+                        <p>@alex_student • Mumbai University</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number">18</span>
+                                <span class="stat-label">Followers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">23</span>
+                                <span class="stat-label">Following</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">12</span>
+                                <span class="stat-label">Posts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary">Edit Profile</button>
+            </div>
+
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" onclick="showTab('dashboard')">Dashboard</button>
+                <button class="tab-btn" onclick="showTab('sessions')">Sessions</button>
+                <button class="tab-btn" onclick="showTab('orders')">Orders</button>
+                <button class="tab-btn" onclick="showTab('achievements')">Achievements</button>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard-tab" class="tab-content active">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Active Subscriptions</h3>
+                        <div class="subscription-item">
+                            <div class="subscription-info">
+                                <h4>Weekly Sessions with Priya</h4>
+                                <p>Next session: Dec 15, 2024</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="subscription-item">
+                            <div class="subscription-info">
+                                <h4>Monthly Protein Delivery</h4>
+                                <p>Next delivery: Dec 20, 2024</p>
+                            </div>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Fitness Goals</h3>
+                        <div class="goal-item">
+                            <div class="goal-info">
+                                <span>Weight Loss</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <span class="goal-percentage">65%</span>
+                        </div>
+                        <div class="goal-item">
+                            <div class="goal-info">
+                                <span>Build Strength</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <span class="goal-percentage">45%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sessions Tab -->
+            <div id="sessions-tab" class="tab-content">
+                <div class="sessions-list">
+                    <div class="session-card">
+                        <div class="session-info">
+                            <h4>Video Session with Priya Sharma</h4>
+                            <p>December 15, 2024 at 6:00 PM</p>
+                            <span class="session-type">Video Call</span>
+                        </div>
+                        <div class="session-actions">
+                            <button class="btn btn-primary btn-sm">Join Session</button>
+                            <button class="btn btn-secondary btn-sm">Reschedule</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="orders-tab" class="tab-content">
+                <div class="orders-list">
+                    <div class="order-card">
+                        <div class="order-info">
+                            <h4>Student Whey Protein - Chocolate</h4>
+                            <p>Order #FTH-2024-001 • Delivered on Dec 10, 2024</p>
+                            <span class="order-total">₹1,899</span>
+                        </div>
+                        <div class="order-status">
+                            <span class="status-badge delivered">Delivered</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Tab -->
+            <div id="achievements-tab" class="tab-content">
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🏆</div>
+                        <h4>First Booking</h4>
+                        <p>Booked your first training session</p>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">💪</div>
+                        <h4>Week Warrior</h4>
+                        <p>Completed 5 sessions this week</p>
+                    </div>
+                    <div class="achievement-card locked">
+                        <div class="achievement-icon">🔒</div>
+                        <h4>Month Master</h4>
+                        <p>Complete 20 sessions this month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include shared components -->
+    <div id="sharedComponents"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    <script>
+        // Page-specific initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSharedComponents();
+            initializeDashboard();
+        });
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            const selectedTab = document.getElementById(`${tabName}-tab`);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+
+        function initializeDashboard() {
+            // Load dashboard data
+            console.log('Dashboard initialized');
+        }
+    </script>
+</body>
+</html>

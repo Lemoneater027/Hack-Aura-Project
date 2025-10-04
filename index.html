@@ -4,44 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitTrainer Hub - Student Fitness Platform</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Load CSS files -->
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/home.css">
+    
     <meta name="theme-color" content="#218085">
-    <meta name="description" content="Hire local trainers, buy student-discounted supplements, and share your fitness journey with FitTrainer Hub">
-    
-    <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="FitTrainer Hub">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏋️</text></svg>">
 </head>
-<body>
-    <!-- Install PWA Banner -->
-    <div id="installBanner" class="install-banner hidden">
-        <div class="install-content">
-            <span>📱 Install FitTrainer Hub for the best experience!</span>
-            <div>
-                <button id="installBtn" class="btn btn-primary btn-sm">Install</button>
-                <button id="dismissInstall" class="btn btn-secondary btn-sm">Later</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Navigation -->
+<body>
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
                 <div class="nav-brand">
-                    <span class="logo">🏋️ FitTrainer Hub</span>
+                    <a href="index.html" class="logo">🏋️ FitTrainer Hub</a>
                 </div>
                 <div class="nav-menu">
-                    <button class="nav-item active" onclick="showSection('home')">Home</button>
-                    <button class="nav-item" onclick="showSection('trainers')">Trainers</button>
-                    <button class="nav-item" onclick="showSection('store')">Store</button>
-                    <button class="nav-item" onclick="showSection('social')">Social</button>
-                    <button class="nav-item" onclick="showSection('profile')">Profile</button>
+                    <a href="index.html" class="nav-item active">Home</a>
+                    <a href="trainers.html" class="nav-item">Trainers</a>
+                    <a href="store.html" class="nav-item">Store</a>
+                    <a href="social.html" class="nav-item">Social</a>
+                    <a href="dashboard.html" class="nav-item">Dashboard</a>
                 </div>
                 <div class="nav-profile">
                     <div class="notification-bell" onclick="toggleNotifications()">
@@ -58,396 +43,110 @@
 
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="mobile-menu hidden">
-        <button class="nav-item" onclick="showSection('home'); toggleMobileMenu()">🏠 Home</button>
-        <button class="nav-item" onclick="showSection('trainers'); toggleMobileMenu()">🏋️ Trainers</button>
-        <button class="nav-item" onclick="showSection('store'); toggleMobileMenu()">🛒 Store</button>
-        <button class="nav-item" onclick="showSection('social'); toggleMobileMenu()">👥 Social</button>
-        <button class="nav-item" onclick="showSection('profile'); toggleMobileMenu()">👤 Profile</button>
+        <a href="index.html" class="nav-item">🏠 Home</a>
+        <a href="trainers.html" class="nav-item">🏋️ Trainers</a>
+        <a href="store.html" class="nav-item">🛒 Store</a>
+        <a href="social.html" class="nav-item">👥 Social</a>
+        <a href="dashboard.html" class="nav-item">👤 Dashboard</a>
+    </div>
+
+    <!-- PWA Install Banner -->
+    <div id="installBanner" class="install-banner hidden">
+        <div class="install-content">
+            <span>📱 Install FitTrainer Hub for the best experience!</span>
+            <div>
+                <button id="installBtn" class="btn btn-primary btn-sm">Install</button>
+                <button id="dismissInstall" class="btn btn-secondary btn-sm">Later</button>
+            </div>
+        </div>
     </div>
 
     <!-- Main Content -->
     <main class="main-content">
-        
-        <!-- Home Section -->
-        <section id="home-section" class="section active">
-            <div class="container">
-                <!-- Hero Section -->
-                <div class="hero">
-                    <div class="hero-content">
-                        <h1>Your Fitness Journey Starts Here</h1>
-                        <p>Connect with certified trainers, get student discounts, and achieve your fitness goals from home.</p>
-                        <div class="hero-stats">
-                            <div class="stat">
-                                <span class="stat-number">500+</span>
-                                <span class="stat-label">Verified Trainers</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">30%</span>
-                                <span class="stat-label">Student Discount</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number">10K+</span>
-                                <span class="stat-label">Happy Students</span>
-                            </div>
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Your Fitness Journey Starts Here</h1>
+                    <p>Connect with certified trainers, get student discounts, and achieve your fitness goals from home.</p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Verified Trainers</span>
                         </div>
-                        <div class="hero-actions">
-                            <button class="btn btn-primary btn-lg" onclick="showSection('trainers')">Find Trainers</button>
-                            <button class="btn btn-secondary btn-lg" onclick="showSection('store')">Browse Store</button>
+                        <div class="stat">
+                            <span class="stat-number">30%</span>
+                            <span class="stat-label">Student Discount</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Happy Students</span>
                         </div>
                     </div>
-                    <div class="hero-image">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=400&fit=crop" alt="Student working out at home">
+                    
+                    <div class="hero-actions">
+                        <a href="trainers.html" class="btn btn-primary btn-lg">Find Trainers</a>
+                        <a href="store.html" class="btn btn-secondary btn-lg">Browse Store</a>
                     </div>
                 </div>
-
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <h2>Quick Actions</h2>
-                    <div class="actions-grid">
-                        <div class="action-card" onclick="showSection('trainers')">
-                            <div class="action-icon">🔍</div>
-                            <h3>Find Trainers</h3>
-                            <p>Search by location and specialization</p>
-                        </div>
-                        <div class="action-card" onclick="showBookingModal()">
-                            <div class="action-icon">📅</div>
-                            <h3>Book Session</h3>
-                            <p>Schedule with your favorite trainer</p>
-                        </div>
-                        <div class="action-card" onclick="showSection('store')">
-                            <div class="action-icon">🛒</div>
-                            <h3>Buy Supplements</h3>
-                            <p>Student discounts on nutrition</p>
-                        </div>
-                        <div class="action-card" onclick="showPostModal()">
-                            <div class="action-icon">📸</div>
-                            <h3>Share Progress</h3>
-                            <p>Post your fitness journey</p>
-                        </div>
-                    </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=400&fit=crop" alt="Student working out at home">
                 </div>
+            </div>
 
-                <!-- Featured Trainers -->
-                <div class="featured-trainers">
-                    <h2>Featured Trainers Near You</h2>
-                    <div class="trainers-grid" id="featuredTrainers">
-                        <!-- Trainers will be loaded here by JavaScript -->
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <a href="trainers.html" class="action-card">
+                        <div class="action-icon">🔍</div>
+                        <h3>Find Trainers</h3>
+                        <p>Search by location and specialization</p>
+                    </a>
+                    <div class="action-card" onclick="showModal('booking')">
+                        <div class="action-icon">📅</div>
+                        <h3>Book Session</h3>
+                        <p>Schedule with your favorite trainer</p>
                     </div>
-                    <div class="text-center">
-                        <button class="btn btn-primary" onclick="showSection('trainers')">View All Trainers</button>
+                    <a href="store.html" class="action-card">
+                        <div class="action-icon">🛒</div>
+                        <h3>Buy Supplements</h3>
+                        <p>Student discounts on nutrition</p>
+                    </a>
+                    <div class="action-card" onclick="showModal('post')">
+                        <div class="action-icon">📸</div>
+                        <h3>Share Progress</h3>
+                        <p>Post your fitness journey</p>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Trainers Section -->
-        <section id="trainers-section" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>Find Your Perfect Trainer</h1>
-                    <p>Certified professionals with student-friendly pricing</p>
-                </div>
-
-                <!-- Filters -->
-                <div class="filters-container">
-                    <div class="filters-row">
-                        <div class="filter-group">
-                            <label>Specialization</label>
-                            <select id="specializationFilter" onchange="filterTrainers()">
-                                <option value="">All Specializations</option>
-                                <option value="home_workout">Home Workouts</option>
-                                <option value="strength_training">Strength Training</option>
-                                <option value="weight_loss">Weight Loss</option>
-                                <option value="yoga">Yoga & Flexibility</option>
-                                <option value="hiit">HIIT Training</option>
-                                <option value="nutrition">Nutrition Coaching</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label>Price Range</label>
-                            <select id="priceFilter" onchange="filterTrainers()">
-                                <option value="">Any Price</option>
-                                <option value="100-200">₹100 - ₹200</option>
-                                <option value="200-300">₹200 - ₹300</option>
-                                <option value="300-400">₹300 - ₹400</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label>Distance</label>
-                            <select id="distanceFilter" onchange="filterTrainers()">
-                                <option value="">Any Distance</option>
-                                <option value="2">Within 2 km</option>
-                                <option value="5">Within 5 km</option>
-                                <option value="10">Within 10 km</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label>Rating</label>
-                            <select id="ratingFilter" onchange="filterTrainers()">
-                                <option value="">Any Rating</option>
-                                <option value="4.5">4.5+ Stars</option>
-                                <option value="4.0">4.0+ Stars</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="filters-actions">
-                        <button class="btn btn-secondary" onclick="clearFilters()">Clear All</button>
-                        <button class="btn btn-primary" onclick="filterTrainers()">Apply Filters</button>
-                    </div>
-                </div>
-
-                <!-- Trainers Grid -->
-                <div class="trainers-grid" id="trainersGrid">
+            <!-- Featured Trainers -->
+            <div class="featured-trainers">
+                <h2>Featured Trainers Near You</h2>
+                <div class="trainers-grid" id="featuredTrainers">
                     <!-- Trainers loaded by JavaScript -->
                 </div>
-
-                <!-- Load More -->
                 <div class="text-center">
-                    <button class="btn btn-secondary" onclick="loadMoreTrainers()">Load More Trainers</button>
+                    <a href="trainers.html" class="btn btn-primary">View All Trainers</a>
                 </div>
             </div>
-        </section>
-
-        <!-- Store Section -->
-        <section id="store-section" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>Student Supplement Store</h1>
-                    <p>Premium supplements at student-friendly prices</p>
-                    <div class="store-banner">
-                        <span class="discount-badge">Up to 30% OFF</span>
-                        <span>Free shipping on orders above ₹999</span>
-                    </div>
-                </div>
-
-                <!-- Store Categories -->
-                <div class="store-categories">
-                    <button class="category-btn active" onclick="filterProducts('all')">All Products</button>
-                    <button class="category-btn" onclick="filterProducts('protein')">Protein</button>
-                    <button class="category-btn" onclick="filterProducts('vitamins')">Vitamins</button>
-                    <button class="category-btn" onclick="filterProducts('pre-workout')">Pre-workout</button>
-                    <button class="category-btn" onclick="filterProducts('recovery')">Recovery</button>
-                    <button class="category-btn" onclick="filterProducts('health')">Health</button>
-                </div>
-
-                <!-- Products Grid -->
-                <div class="products-grid" id="productsGrid">
-                    <!-- Products loaded by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Social Section -->
-        <section id="social-section" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>Fitness Community</h1>
-                    <p>Share your journey and get inspired by others</p>
-                    <button class="btn btn-primary" onclick="showPostModal()">Share Your Progress</button>
-                </div>
-
-                <!-- Social Feed -->
-                <div class="social-feed" id="socialFeed">
-                    <!-- Posts loaded by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Profile Section -->
-        <section id="profile-section" class="section">
-            <div class="container">
-                <div class="profile-header">
-                    <div class="profile-info">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Profile" class="profile-image">
-                        <div class="profile-details">
-                            <h1>Alex Kumar</h1>
-                            <p>@alex_student • Mumbai University</p>
-                            <div class="profile-stats">
-                                <div class="stat">
-                                    <span class="stat-number">18</span>
-                                    <span class="stat-label">Followers</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">23</span>
-                                    <span class="stat-label">Following</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">12</span>
-                                    <span class="stat-label">Posts</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary">Edit Profile</button>
-                </div>
-
-                <!-- Profile Tabs -->
-                <div class="profile-tabs">
-                    <button class="tab-btn active" onclick="showProfileTab('dashboard')">Dashboard</button>
-                    <button class="tab-btn" onclick="showProfileTab('sessions')">Sessions</button>
-                    <button class="tab-btn" onclick="showProfileTab('orders')">Orders</button>
-                    <button class="tab-btn" onclick="showProfileTab('achievements')">Achievements</button>
-                </div>
-
-                <!-- Dashboard Tab -->
-                <div id="dashboard-tab" class="tab-content active">
-                    <div class="dashboard-grid">
-                        <div class="dashboard-card">
-                            <h3>Active Subscriptions</h3>
-                            <div class="subscription-item">
-                                <div class="subscription-info">
-                                    <h4>Weekly Sessions with Priya</h4>
-                                    <p>Next session: Dec 15, 2024</p>
-                                </div>
-                                <span class="status-badge active">Active</span>
-                            </div>
-                            <div class="subscription-item">
-                                <div class="subscription-info">
-                                    <h4>Monthly Protein Delivery</h4>
-                                    <p>Next delivery: Dec 20, 2024</p>
-                                </div>
-                                <span class="status-badge active">Active</span>
-                            </div>
-                        </div>
-
-                        <div class="dashboard-card">
-                            <h3>Fitness Goals</h3>
-                            <div class="goal-item">
-                                <div class="goal-info">
-                                    <span>Weight Loss</span>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 65%"></div>
-                                    </div>
-                                </div>
-                                <span class="goal-percentage">65%</span>
-                            </div>
-                            <div class="goal-item">
-                                <div class="goal-info">
-                                    <span>Build Strength</span>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 45%"></div>
-                                    </div>
-                                </div>
-                                <span class="goal-percentage">45%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
 
-    <!-- Shopping Cart Sidebar -->
-    <div id="cartSidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Shopping Cart</h3>
-            <button onclick="toggleCart()">✕</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <!-- Cart items loaded by JavaScript -->
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <strong>Total: ₹<span id="cartTotal">0</span></strong>
-            </div>
-            <button class="btn btn-primary btn-full" onclick="proceedToCheckout()">Proceed to Checkout</button>
-        </div>
-    </div>
-
-    <!-- Cart Floating Button -->
-    <div class="cart-float" onclick="toggleCart()">
-        🛒 <span id="cartCount" class="cart-count">0</span>
-    </div>
-
-    <!-- Modals -->
-    
-    <!-- Booking Modal -->
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Book Training Session</h2>
-                <button class="modal-close" onclick="closeModal('bookingModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="booking-form">
-                    <div class="form-group">
-                        <label>Session Type</label>
-                        <div class="session-types">
-                            <label class="session-option">
-                                <input type="radio" name="sessionType" value="video" checked>
-                                <span>Video Call - ₹150</span>
-                            </label>
-                            <label class="session-option">
-                                <input type="radio" name="sessionType" value="inperson">
-                                <span>In-Person - ₹200</span>
-                            </label>
-                            <label class="session-option">
-                                <input type="radio" name="sessionType" value="chat">
-                                <span>Chat Consultation - ₹50</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Preferred Date</label>
-                        <input type="date" id="sessionDate" min="2024-12-03">
-                    </div>
-                    <div class="form-group">
-                        <label>Preferred Time</label>
-                        <select id="sessionTime">
-                            <option value="09:00">9:00 AM</option>
-                            <option value="10:00">10:00 AM</option>
-                            <option value="11:00">11:00 AM</option>
-                            <option value="17:00">5:00 PM</option>
-                            <option value="18:00">6:00 PM</option>
-                            <option value="19:00">7:00 PM</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Special Requests</label>
-                        <textarea placeholder="Any specific requirements or focus areas..."></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal('bookingModal')">Cancel</button>
-                <button class="btn btn-primary" onclick="confirmBooking()">Book Session - ₹150</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Post Modal -->
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Share Your Progress</h2>
-                <button class="modal-close" onclick="closeModal('postModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="post-form">
-                    <textarea id="postContent" placeholder="Share your fitness wins, challenges, or tips..."></textarea>
-                    <div class="post-options">
-                        <button class="btn btn-secondary" onclick="selectImage()">📷 Add Photo</button>
-                        <button class="btn btn-secondary" onclick="addTag('progress')">#progress</button>
-                        <button class="btn btn-secondary" onclick="addTag('gains')">#gains</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal('postModal')">Cancel</button>
-                <button class="btn btn-primary" onclick="sharePost()">Share Progress</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Loading Indicator -->
-    <div id="loadingSpinner" class="loading-spinner hidden">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Toast Notifications -->
-    <div id="toastContainer" class="toast-container"></div>
+    <!-- Include shared components -->
+    <div id="sharedComponents"></div>
 
     <!-- Scripts -->
     <script src="app.js"></script>
+    <script>
+        // Page-specific initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSharedComponents();
+            loadFeaturedTrainers();
+            setupPWAInstall();
+        });
+    </script>
 </body>
 </html>

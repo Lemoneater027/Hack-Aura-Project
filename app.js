@@ -1,25 +1,6 @@
-// FitTrainer Hub - PWA JavaScript
+// FitTrainer Hub - Shared JavaScript for Multi-Page PWA
 
-// Application State
-const appState = {
-    currentSection: 'home',
-    currentUser: {
-        id: 'user-123',
-        name: 'Ravi Kumar',
-        username: 'ravi_student',
-        email: 'ravi@university.edu',
-        image: 'https://images.unsplash.com/photo-1687757660309-c41415d42f9e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        university: 'Mumbai University',
-        year: '2nd Year Engineering',
-        fitnessGoals: ['Weight Loss', 'Build Strength'],
-        location: 'Andheri West, Mumbai'
-    },
-    cart: [],
-    notifications: [],
-    isOnline: navigator.onLine
-};
-
-// Mock Data
+// Sample data (shared across pages)
 const mockTrainers = [
     {
         id: 1,
@@ -31,7 +12,7 @@ const mockTrainers = [
         reviews: 156,
         basePrice: '₹300/hour',
         studentPrice: '₹200/hour',
-        image: 'https://images.unsplash.com/photo-1611884286012-cd1f44cf74e7?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        image: 'https://images.unsplash.com/photo-1594824804732-ca8db7536926?w=300',
         verified: true
     },
     {
@@ -44,7 +25,7 @@ const mockTrainers = [
         reviews: 203,
         basePrice: '₹400/hour',
         studentPrice: '₹250/hour',
-        image: 'https://plus.unsplash.com/premium_photo-1726614172234-e35c6e66470d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300',
         verified: true
     },
     {
@@ -57,7 +38,7 @@ const mockTrainers = [
         reviews: 128,
         basePrice: '₹350/hour',
         studentPrice: '₹225/hour',
-        image: 'https://images.unsplash.com/photo-1685811985058-f53c8dfd5a6e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        image: 'https://images.unsplash.com/photo-1594824804732-ca8db7536926?w=300',
         verified: true
     }
 ];
@@ -67,7 +48,6 @@ const mockProducts = [
         id: 1,
         name: 'Student Whey Protein - Chocolate',
         brand: 'FitStudent',
-        category: 'protein',
         originalPrice: '₹2,499',
         studentPrice: '₹1,899',
         discount: '24% OFF',
@@ -80,13 +60,24 @@ const mockProducts = [
         id: 2,
         name: 'Student Multivitamin Pack',
         brand: 'HealthyStudent',
-        category: 'vitamins',
         originalPrice: '₹899',
         studentPrice: '₹649',
         discount: '28% OFF',
         image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300',
         rating: 4.7,
         reviews: 156,
+        inStock: true
+    },
+    {
+        id: 3,
+        name: 'Pre-Workout Energy Booster',
+        brand: 'PowerUp',
+        originalPrice: '₹1,299',
+        studentPrice: '₹999',
+        discount: '23% OFF',
+        image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300',
+        rating: 4.3,
+        reviews: 89,
         inStock: true
     }
 ];
@@ -106,67 +97,170 @@ const mockSocialPosts = [
         shares: 5,
         timeAgo: '2 hours ago',
         tags: ['progress', 'homeWorkout']
+    },
+    {
+        id: 2,
+        user: {
+            name: 'Aarya Chandra',
+            username: '@aarya_fit',
+            image: 'https://images.unsplash.com/photo-1494790108755-2616b612b77c?w=150'
+        },
+        content: 'Finally nailed the perfect protein smoothie recipe! Thanks to trainer Vikash 🥤',
+        image: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400',
+        likes: 67,
+        comments: 15,
+        shares: 12,
+        timeAgo: '5 hours ago',
+        tags: ['nutrition', 'smoothie']
     }
 ];
 
-// DOM Ready
-document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
-});
+// App state (shared across pages)
+let cart = JSON.parse(localStorage.getItem('fittrainer_cart')) || [];
 
-// Initialize Application
-function initializeApp() {
-    console.log('🚀 FitTrainer Hub PWA initialized');
+// Initialize shared components on every page
+function initializeSharedComponents() {
+    const sharedContainer = document.getElementById('sharedComponents');
+    if (sharedContainer) {
+        sharedContainer.innerHTML = getSharedComponentsHTML();
+    }
     
-    loadFeaturedTrainers();
-    loadAllTrainers();
-    loadProducts();
-    loadSocialFeed();
-    updateCartUI();
-    
+    // Register service worker
     if ('serviceWorker' in navigator) {
         registerServiceWorker();
     }
     
-    setupPWAInstall();
-    setupNetworkHandlers();
+    // Update cart UI
+    updateCartUI();
     
-    console.log('✅ App initialization complete');
+    // Setup mobile menu
+    setupMobileMenu();
+    
+    console.log('🚀 FitTrainer Hub initialized on', getCurrentPageName());
 }
 
-// Navigation Functions
-function showSection(sectionName) {
-    document.querySelectorAll('.section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    const targetSection = document.getElementById(`${sectionName}-section`);
-    if (targetSection) {
-        targetSection.classList.add('active');
-        appState.currentSection = sectionName;
-        
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        
-        const activeNavItems = document.querySelectorAll(`[onclick="showSection('${sectionName}')"]`);
-        activeNavItems.forEach(item => item.classList.add('active'));
-        
-        console.log(`📱 Navigated to ${sectionName} section`);
-    }
+// Get shared components HTML (cart, modals, notifications)
+function getSharedComponentsHTML() {
+    return `
+        <!-- Shopping Cart Button -->
+        <div class="cart-float" onclick="toggleCart()">
+            🛒 <span id="cartCount" class="cart-count">0</span>
+        </div>
+
+        <!-- Shopping Cart Sidebar -->
+        <div id="cartSidebar" class="cart-sidebar">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button onclick="toggleCart()">✕</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items loaded here -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">Total: ₹<span id="cartTotal">0</span></div>
+                <button class="btn btn-primary btn-full" onclick="proceedToCheckout()">Checkout</button>
+            </div>
+        </div>
+
+        <!-- Booking Modal -->
+        <div id="bookingModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Book Training Session</h2>
+                    <button onclick="closeModal('booking')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Select your session type:</p>
+                    <div class="session-options">
+                        <label><input type="radio" name="session" value="video"> Video Call - ₹150</label>
+                        <label><input type="radio" name="session" value="person"> In-Person - ₹200</label>
+                        <label><input type="radio" name="session" value="chat"> Chat - ₹50</label>
+                    </div>
+                    <input type="date" placeholder="Select date">
+                    <select>
+                        <option>Select time</option>
+                        <option>9:00 AM</option>
+                        <option>10:00 AM</option>
+                        <option>6:00 PM</option>
+                        <option>7:00 PM</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal('booking')">Cancel</button>
+                    <button class="btn btn-primary" onclick="confirmBooking()">Book Session</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Modal -->
+        <div id="postModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Share Your Progress</h2>
+                    <button onclick="closeModal('post')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="postContent" placeholder="Share your fitness wins, challenges, or tips..."></textarea>
+                    <button class="btn btn-secondary">📷 Add Photo</button>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal('post')">Cancel</button>
+                    <button class="btn btn-primary" onclick="sharePost()">Share Progress</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Panel -->
+        <div id="notificationsPanel" class="notifications-panel">
+            <div class="notifications-header">
+                <h3>Notifications</h3>
+                <button onclick="toggleNotifications()">✕</button>
+            </div>
+            <div class="notifications-list">
+                <div class="notification-item unread">
+                    <div class="notification-icon">💬</div>
+                    <div class="notification-content">
+                        <h4>New message from Priya</h4>
+                        <p>Great workout today! Here's your next week's plan</p>
+                        <span class="notification-time">10 minutes ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    `;
 }
 
+// Navigation functions
 function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenu.classList.toggle('hidden');
+    if (mobileMenu) {
+        mobileMenu.classList.toggle('hidden');
+    }
 }
 
 function toggleNotifications() {
     const panel = document.getElementById('notificationsPanel');
-    if (panel) panel.classList.toggle('open');
+    if (panel) {
+        panel.classList.toggle('open');
+    }
 }
 
-// Trainer Functions
+function setupMobileMenu() {
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (mobileMenu && !mobileMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
+        }
+    });
+}
+
+// Page-specific load functions
 function loadFeaturedTrainers() {
     const container = document.getElementById('featuredTrainers');
     if (!container) return;
@@ -182,19 +276,32 @@ function loadAllTrainers() {
     container.innerHTML = mockTrainers.map(trainer => createTrainerCard(trainer)).join('');
 }
 
+function loadProducts() {
+    const container = document.getElementById('productsGrid');
+    if (!container) return;
+    
+    container.innerHTML = mockProducts.map(product => createProductCard(product)).join('');
+}
+
+function loadSocialFeed() {
+    const container = document.getElementById('socialFeed');
+    if (!container) return;
+    
+    container.innerHTML = mockSocialPosts.map(post => createSocialPost(post)).join('');
+}
+
+// Create HTML functions (same as before)
 function createTrainerCard(trainer) {
     return `
         <div class="trainer-card">
             <div class="trainer-image">
-                <img src="${trainer.image}" alt="${trainer.name}" loading="lazy">
+                <img src="${trainer.image}" alt="${trainer.name}">
                 ${trainer.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
             </div>
             <div class="trainer-info">
                 <h3 class="trainer-name">${trainer.name}</h3>
                 <p class="trainer-specialization">${trainer.specialization}</p>
-                <div class="trainer-location">
-                    📍 ${trainer.location} • ${trainer.distance}
-                </div>
+                <div class="trainer-location">📍 ${trainer.location} • ${trainer.distance}</div>
                 <div class="trainer-rating">
                     <div class="stars">${generateStars(trainer.rating)}</div>
                     <span>(${trainer.reviews} reviews)</span>
@@ -205,51 +312,19 @@ function createTrainerCard(trainer) {
                     <span class="discount-label">Student Price</span>
                 </div>
                 <div class="trainer-actions">
-                    <button class="btn btn-primary" onclick="bookTrainer(${trainer.id})">
-                        Book Session
-                    </button>
-                    <button class="btn btn-secondary" onclick="viewTrainer(${trainer.id})">
-                        View Profile
-                    </button>
+                    <button class="btn btn-primary" onclick="bookTrainer(${trainer.id})">Book Session</button>
+                    <button class="btn btn-secondary" onclick="viewTrainer(${trainer.id})">View Profile</button>
                 </div>
             </div>
         </div>
     `;
 }
 
-function generateStars(rating) {
-    const fullStars = Math.floor(rating);
-    let stars = '';
-    for (let i = 0; i < fullStars; i++) {
-        stars += '⭐';
-    }
-    return stars;
-}
-
-function bookTrainer(trainerId) {
-    const trainer = mockTrainers.find(t => t.id === trainerId);
-    if (trainer) {
-        showBookingModal(trainer);
-    }
-}
-
-function viewTrainer(trainerId) {
-    showToast('Opening trainer profile...');
-}
-
-// E-commerce Functions
-function loadProducts() {
-    const container = document.getElementById('productsGrid');
-    if (!container) return;
-    
-    container.innerHTML = mockProducts.map(product => createProductCard(product)).join('');
-}
-
 function createProductCard(product) {
     return `
         <div class="product-card">
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}" loading="lazy">
+                <img src="${product.image}" alt="${product.name}">
                 <div class="discount-badge">${product.discount}</div>
             </div>
             <div class="product-info">
@@ -264,99 +339,23 @@ function createProductCard(product) {
                     <span class="student-price">${product.studentPrice}</span>
                 </div>
                 <div class="product-actions">
-                    <button class="btn btn-primary" onclick="addToCart(${product.id})">
-                        Add to Cart
-                    </button>
+                    <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to Cart</button>
                 </div>
             </div>
         </div>
     `;
 }
 
-function filterProducts(category) {
-    document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    let filteredProducts = mockProducts;
-    if (category !== 'all') {
-        filteredProducts = mockProducts.filter(product => 
-            product.category === category
-        );
-    }
-    
-    const container = document.getElementById('productsGrid');
-    if (container) {
-        container.innerHTML = filteredProducts.map(product => createProductCard(product)).join('');
-        showToast(`Showing ${filteredProducts.length} products`);
-    }
-}
-
-// Shopping Cart Functions
-function addToCart(productId) {
-    const product = mockProducts.find(p => p.id === productId);
-    if (!product) return;
-    
-    const existingItem = appState.cart.find(item => item.productId === productId);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        appState.cart.push({
-            productId: productId,
-            quantity: 1,
-            product: product
-        });
-    }
-    
-    updateCartUI();
-    showToast(`${product.name} added to cart!`);
-}
-
-function updateCartUI() {
-    const cartCount = document.getElementById('cartCount');
-    const totalItems = appState.cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    if (cartCount) {
-        cartCount.textContent = totalItems;
-        cartCount.style.display = totalItems > 0 ? 'block' : 'none';
-    }
-}
-
-function toggleCart() {
-    const cartSidebar = document.getElementById('cartSidebar');
-    cartSidebar.classList.toggle('open');
-}
-
-function proceedToCheckout() {
-    if (appState.cart.length === 0) {
-        showToast('Your cart is empty', 'warning');
-        return;
-    }
-    showToast('Redirecting to checkout...');
-}
-
-// Social Functions
-function loadSocialFeed() {
-    const container = document.getElementById('socialFeed');
-    if (!container) return;
-    
-    container.innerHTML = mockSocialPosts.map(post => createSocialPost(post)).join('');
-}
-
 function createSocialPost(post) {
     return `
-        <div class="social-post" data-post-id="${post.id}">
+        <div class="social-post">
             <div class="post-header">
-                <div class="user-info">
-                    <img src="${post.user.image}" alt="${post.user.name}" class="user-avatar">
-                    <div class="user-details">
-                        <h4 class="user-name">${post.user.name}</h4>
-                        <span class="username">${post.user.username}</span>
-                        <span class="post-time">${post.timeAgo}</span>
-                    </div>
+                <img src="${post.user.image}" alt="${post.user.name}" class="user-avatar">
+                <div>
+                    <div class="user-name">${post.user.name}</div>
+                    <div class="username">${post.user.username}</div>
                 </div>
+                <div class="post-time">${post.timeAgo}</div>
             </div>
             <div class="post-content">
                 <p>${post.content}</p>
@@ -366,119 +365,218 @@ function createSocialPost(post) {
                 </div>
             </div>
             <div class="post-actions">
-                <button class="action-btn like-btn" onclick="toggleLike(${post.id})">
-                    ❤️ ${post.likes}
-                </button>
-                <button class="action-btn comment-btn">
-                    💬 ${post.comments}
-                </button>
-                <button class="action-btn share-btn" onclick="sharePost(${post.id})">
-                    🔄 ${post.shares}
-                </button>
+                <button class="action-btn" onclick="likePost(${post.id})">❤️ ${post.likes}</button>
+                <button class="action-btn">💬 ${post.comments}</button>
+                <button class="action-btn">🔄 ${post.shares}</button>
             </div>
         </div>
     `;
 }
 
-function toggleLike(postId) {
-    const post = mockSocialPosts.find(p => p.id === postId);
-    if (post) {
-        post.likes += 1;
-        loadSocialFeed();
-        showToast('Post liked!');
+// Utility functions
+function generateStars(rating) {
+    const fullStars = Math.floor(rating);
+    let stars = '';
+    for (let i = 0; i < fullStars; i++) {
+        stars += '⭐';
     }
+    return stars;
 }
 
-function sharePost(postId) {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Check out this fitness post!',
-            text: 'Awesome fitness progress on FitTrainer Hub',
-            url: window.location.href
-        });
+function getCurrentPageName() {
+    const path = window.location.pathname;
+    if (path.includes('trainers')) return 'trainers';
+    if (path.includes('store')) return 'store';
+    if (path.includes('social')) return 'social';
+    if (path.includes('dashboard')) return 'dashboard';
+    return 'home';
+}
+
+// Shopping cart functions
+function addToCart(productId) {
+    const product = mockProducts.find(p => p.id === productId);
+    if (!product) return;
+    
+    const existingItem = cart.find(item => item.productId === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
     } else {
-        navigator.clipboard.writeText(window.location.href);
-        showToast('Link copied to clipboard!');
+        cart.push({
+            productId: productId,
+            quantity: 1,
+            product: product
+        });
+    }
+    
+    updateCartUI();
+    saveCartToStorage();
+    showToast(`${product.name} added to cart!`);
+}
+
+function updateCartUI() {
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = cart.reduce((sum, item) => {
+        const price = parseInt(item.product.studentPrice.replace(/[^\d]/g, ''));
+        return sum + (price * item.quantity);
+    }, 0);
+    
+    if (cartCount) {
+        cartCount.textContent = totalItems;
+        cartCount.style.display = totalItems > 0 ? 'block' : 'none';
+    }
+    
+    if (cartTotal) {
+        cartTotal.textContent = totalPrice.toLocaleString();
+    }
+    
+    if (cartItems) {
+        cartItems.innerHTML = cart.map(item => `
+            <div class="cart-item" style="display: flex; align-items: center; padding: 1rem; border-bottom: 1px solid #e5e7eb;">
+                <img src="${item.product.image}" alt="${item.product.name}" style="width: 60px; height: 60px; border-radius: 0.5rem; margin-right: 1rem;">
+                <div style="flex: 1;">
+                    <div style="font-weight: 500;">${item.product.name}</div>
+                    <div style="color: #218085; font-weight: 600;">${item.product.studentPrice}</div>
+                    <div style="font-size: 0.875rem; color: #6b7280;">Qty: ${item.quantity}</div>
+                </div>
+            </div>
+        `).join('');
     }
 }
 
-// Modal Functions
-function showBookingModal(trainer = null) {
-    const modal = document.getElementById('bookingModal');
-    modal.classList.add('active');
-    modal.style.display = 'flex';
+function toggleCart() {
+    const cartSidebar = document.getElementById('cartSidebar');
+    if (cartSidebar) {
+        cartSidebar.classList.toggle('open');
+    }
 }
 
-function showPostModal() {
-    const modal = document.getElementById('postModal');
-    modal.classList.add('active');
-    modal.style.display = 'flex';
+function saveCartToStorage() {
+    localStorage.setItem('fittrainer_cart', JSON.stringify(cart));
 }
 
-function closeModal(modalId) {
+function proceedToCheckout() {
+    if (cart.length === 0) {
+        showToast('Your cart is empty', 'warning');
+        return;
+    }
+    showToast('Redirecting to checkout...');
+}
+
+// Modal functions
+function showModal(type) {
+    const modalId = type === 'booking' ? 'bookingModal' : 'postModal';
     const modal = document.getElementById(modalId);
-    modal.classList.remove('active');
-    modal.style.display = 'none';
+    if (modal) {
+        modal.classList.add('active');
+        modal.style.display = 'flex';
+    }
+}
+
+function closeModal(type) {
+    const modalId = type === 'booking' ? 'bookingModal' : 'postModal';
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+        modal.style.display = 'none';
+    }
+}
+
+// Action functions
+function bookTrainer(trainerId) {
+    showModal('booking');
+}
+
+function viewTrainer(trainerId) {
+    showToast('Opening trainer profile...');
 }
 
 function confirmBooking() {
-    const sessionDate = document.getElementById('sessionDate')?.value;
-    const sessionTime = document.getElementById('sessionTime')?.value;
-    
-    if (!sessionDate || !sessionTime) {
-        showToast('Please select date and time', 'warning');
-        return;
-    }
-    
-    showLoading(true);
-    
-    setTimeout(() => {
-        showLoading(false);
-        closeModal('bookingModal');
-        showToast('Session booked successfully! 🎉');
-    }, 2000);
+    closeModal('booking');
+    showToast('Session booked successfully! 🎉');
 }
 
-function shareProgress() {
+function sharePost() {
     const content = document.getElementById('postContent')?.value;
-    
-    if (!content.trim()) {
+    if (!content || !content.trim()) {
         showToast('Please write something to share', 'warning');
         return;
     }
     
-    showLoading(true);
+    closeModal('post');
+    showToast('Progress shared successfully! 🎉');
     
-    setTimeout(() => {
-        showLoading(false);
-        closeModal('postModal');
-        showToast('Progress shared successfully! 🎉');
-        document.getElementById('postContent').value = '';
-    }, 1500);
+    // Clear the content
+    const postContent = document.getElementById('postContent');
+    if (postContent) {
+        postContent.value = '';
+    }
 }
 
-// Utility Functions
+function likePost(postId) {
+    showToast('Post liked! ❤️');
+}
+
+// Filter functions
+function filterTrainers() {
+    showToast('Applying filters...');
+}
+
+function clearFilters() {
+    document.querySelectorAll('.filters-container select').forEach(select => {
+        select.value = '';
+    });
+    showToast('Filters cleared');
+}
+
+function filterProducts(category) {
+    // Update category buttons
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Filter products
+    let filteredProducts = mockProducts;
+    if (category !== 'all') {
+        // In a real app, you'd filter based on category
+        showToast(`Showing ${category} products`);
+    } else {
+        showToast('Showing all products');
+    }
+    
+    // Reload products (simplified - in real app would filter the array)
+    loadProducts();
+}
+
+function loadMoreTrainers() {
+    showToast('Loading more trainers...');
+}
+
+// Toast notification function
 function showToast(message, type = 'success') {
     const container = document.getElementById('toastContainer');
+    if (!container) return;
+    
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.textContent = message;
     
     container.appendChild(toast);
     
+    // Remove after 3 seconds
     setTimeout(() => {
-        toast.remove();
+        if (toast.parentNode) {
+            toast.remove();
+        }
     }, 3000);
 }
 
-function showLoading(show) {
-    const spinner = document.getElementById('loadingSpinner');
-    if (spinner) {
-        spinner.classList.toggle('hidden', !show);
-    }
-}
-
-// PWA Functions
+// PWA functions
 function setupPWAInstall() {
     let deferredPrompt;
     
@@ -492,23 +590,36 @@ function setupPWAInstall() {
         }
     });
     
-    document.getElementById('installBtn')?.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            
-            if (outcome === 'accepted') {
-                showToast('App installed successfully! 🎉');
-            }
-            
-            deferredPrompt = null;
-            document.getElementById('installBanner').classList.add('hidden');
-        }
-    });
+    const installBtn = document.getElementById('installBtn');
+    const dismissBtn = document.getElementById('dismissInstall');
     
-    document.getElementById('dismissInstall')?.addEventListener('click', () => {
-        document.getElementById('installBanner').classList.add('hidden');
-    });
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    showToast('App installed successfully! 🎉');
+                }
+                
+                deferredPrompt = null;
+                const banner = document.getElementById('installBanner');
+                if (banner) {
+                    banner.classList.add('hidden');
+                }
+            }
+        });
+    }
+    
+    if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+            const banner = document.getElementById('installBanner');
+            if (banner) {
+                banner.classList.add('hidden');
+            }
+        });
+    }
 }
 
 async function registerServiceWorker() {
@@ -520,67 +631,4 @@ async function registerServiceWorker() {
     }
 }
 
-function setupNetworkHandlers() {
-    function updateNetworkStatus() {
-        appState.isOnline = navigator.onLine;
-        
-        if (!appState.isOnline) {
-            showToast('You are offline 📡', 'warning');
-        }
-    }
-    
-    window.addEventListener('online', () => {
-        updateNetworkStatus();
-        showToast('Back online! 🌐');
-    });
-    
-    window.addEventListener('offline', updateNetworkStatus);
-    
-    updateNetworkStatus();
-}
-
-// Filter Functions
-function filterTrainers() {
-    showToast('Applying filters...');
-    // In real app, would filter the trainer results
-}
-
-function clearFilters() {
-    document.querySelectorAll('.filters-container select').forEach(select => {
-        select.value = '';
-    });
-    showToast('Filters cleared');
-}
-
-function loadMoreTrainers() {
-    showToast('Loading more trainers...');
-}
-
-function showProfileTab(tabName) {
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    const selectedTab = document.getElementById(`${tabName}-tab`);
-    if (selectedTab) {
-        selectedTab.classList.add('active');
-    }
-    
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    const activeBtn = document.querySelector(`[onclick="showProfileTab('${tabName}')"]`);
-    if (activeBtn) {
-        activeBtn.classList.add('active');
-    }
-}
-
-// Initialize on load
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        showToast('Welcome to FitTrainer Hub! 🏋️‍♂️');
-    }, 1000);
-});
-
-console.log('🎯 FitTrainer Hub PWA JavaScript loaded successfully!');
+console.log('✅ FitTrainer Hub JavaScript loaded!');

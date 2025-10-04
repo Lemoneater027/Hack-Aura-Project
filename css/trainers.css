@@ -1,0 +1,192 @@
+/* trainers.css - Trainers page specific styles */
+
+.main-content {
+    padding: 2rem 0;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Filters - Trainers page specific */
+.filters-container {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.filters-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-group label {
+    display: block;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 0.5rem;
+    background: var(--white);
+    font-size: 0.875rem;
+}
+
+.filters-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Trainers Grid */
+.trainers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.trainer-card {
+    background: var(--white);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+}
+
+.trainer-card:hover {
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.trainer-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.trainer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.verified-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: var(--success-color);
+    color: var(--white);
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.trainer-info {
+    padding: 1.5rem;
+}
+
+.trainer-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.trainer-specialization {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.trainer-location {
+    color: var(--gray-500);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.trainer-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.stars {
+    color: #FFC107;
+}
+
+.trainer-pricing {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: var(--gray-500);
+    font-size: 0.875rem;
+}
+
+.student-price {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.discount-label {
+    background: var(--success-color);
+    color: var(--white);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.trainer-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Trainers page responsive */
+@media (max-width: 768px) {
+    .filters-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .trainers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}

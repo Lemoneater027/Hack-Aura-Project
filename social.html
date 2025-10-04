@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Community - FitTrainer Hub</title>
+    
+    <!-- Load CSS files -->
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/social.css">
+    
+    <meta name="theme-color" content="#218085">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">🏋️ FitTrainer Hub</a>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-item">Home</a>
+                    <a href="trainers.html" class="nav-item">Trainers</a>
+                    <a href="store.html" class="nav-item">Store</a>
+                    <a href="social.html" class="nav-item active">Social</a>
+                    <a href="dashboard.html" class="nav-item">Dashboard</a>
+                </div>
+                <div class="nav-profile">
+                    <div class="notification-bell" onclick="toggleNotifications()">
+                        <span class="bell-icon">🔔</span>
+                        <span class="notification-count">2</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Profile" class="profile-avatar">
+                    <span class="profile-name">Alex</span>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu hidden">
+        <a href="index.html" class="nav-item">🏠 Home</a>
+        <a href="trainers.html" class="nav-item">🏋️ Trainers</a>
+        <a href="store.html" class="nav-item">🛒 Store</a>
+        <a href="social.html" class="nav-item">👥 Social</a>
+        <a href="dashboard.html" class="nav-item">👤 Dashboard</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Fitness Community</h1>
+                <p>Share your journey and get inspired by others</p>
+                <button class="btn btn-primary" onclick="showModal('post')">Share Your Progress</button>
+            </div>
+
+            <!-- Social Feed -->
+            <div class="social-feed" id="socialFeed">
+                <!-- Posts loaded by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Include shared components -->
+    <div id="sharedComponents"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    <script>
+        // Page-specific initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSharedComponents();
+            loadSocialFeed();
+        });
+    </script>
+</body>
+</html>
