@@ -1,90 +1,48 @@
-// FitTrainer Hub - Full Multi-Page Service Worker (with per-page CSS auto update)
+// FitTrainer Hub - Hackathon-safe auto-updating Service Worker
 
-const CACHE_NAME = 'fittrainer-hub-v4'; // bump only if you change SW logic
-const CORE_FILES = [
-  '/',
+const CACHE_NAME = 'fittrainer-hub-v5'; // keep versioned for clarity
+const CORE_ASSETS = [
+  '/', 
   '/index.html',
   '/manifest.json',
   '/js/app.js'
 ];
 
-// Install - cache core files
+// Install - pre-cache only essentials
 self.addEventListener('install', (event) => {
-  console.log('🔧 Installing Service Worker...');
+  console.log('🔧 Installing service worker...');
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(CORE_FILES))
-      .then(() => self.skipWaiting())
+      .then((cache) => cache.addAll(CORE_ASSETS))
+      .then(() => self.skipWaiting()) // activate immediately
   );
 });
 
-// Activate - clear old caches
+// Activate - delete old caches
 self.addEventListener('activate', (event) => {
-  console.log('🚀 Activating new Service Worker...');
+  console.log('🚀 Activating service worker...');
   event.waitUntil(
-    caches.keys().then((names) =>
-      Promise.all(
-        names.map((name) => {
-          if (name !== CACHE_NAME) {
-            console.log('🗑️ Removing old cache:', name);
-            return caches.delete(name);
-          }
-        })
-      )
-    ).then(() => self.clients.claim())
+    caches.keys().then((keys) => 
+      Promise.all(keys.map((key) => key !== CACHE_NAME && caches.delete(key)))
+    ).then(() => self.clients.claim()) // take control immediately
   );
 });
 
-// Fetch - smart handling for HTML, CSS, JS, images
+// Fetch - always try the network first
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
-  const url = new URL(req.url);
-
-  // 🔹 HTML files → network first (for latest structure)
-  if (req.destination === 'document') {
-    event.respondWith(
-      fetch(req)
-        .then((res) => {
-          const resClone = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
-          return res;
-        })
-        .catch(() => caches.match(req).then(r => r || caches.match('/index.html')))
-    );
-    return;
-  }
-
-  // 🔹 CSS & JS files → network first (for instant updates)
-  if (req.destination === 'style' || req.destination === 'script') {
-    event.respondWith(
-      fetch(req)
-        .then((res) => {
-          const resClone = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
-          return res;
-        })
-        .catch(() => caches.match(req))
-    );
-    return;
-  }
-
-  // 🔹 Images → cache first, fallback to network
-  if (req.destination === 'image') {
-    event.respondWith(
-      caches.match(req)
-        .then((cached) => cached || fetch(req).then((res) => {
-          const resClone = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
-          return res;
-        }))
-    );
-    return;
-  }
-
-  // Default → network fallback to cache
-  event.respondWith(fetch(req).catch(() => caches.match(req)));
+  event.respondWith(
+    fetch(req)
+      .then((res) => {
+        // Cache a fresh copy
+        const resClone = res.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+        return res;
+      })
+      .catch(() => caches.match(req)) // fallback offline
+  );
 });
 
-console.log('✅ Multi-CSS Service Worker ready');
+console.log('✅ Service worker loaded (auto-updating + judge-safe)');

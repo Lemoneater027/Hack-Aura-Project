@@ -739,3 +739,171 @@ async function registerServiceWorker() {
 }
 
 console.log('✅ FitTrainer Hub JavaScript loaded!');
+// Chatbot Functionality
+let chatbotMinimized = false;
+
+// Chatbot responses database
+const chatbotResponses = {
+    greetings: [
+        "Hello! I'm here to help you with your fitness journey! 💪",
+        "Hi there! Ready to get fit? Let me know how I can assist you! 🏋️",
+        "Hey! Welcome to FitTrainer Hub. What fitness goals can I help you achieve today?"
+    ],
+    
+    trainers: [
+        "I can help you find the perfect trainer! We have certified professionals specializing in:\n• Home Workouts (₹200-300/week)\n• Strength Training (₹250-400/week)\n• Weight Loss & Cardio (₹225-350/week)\n• Yoga & Pilates (₹300-450/week)\n\nWould you like me to show you trainers in your area?",
+        "Great question! Our trainers are verified professionals with student-friendly pricing. Most offer both online and in-person sessions. What type of training interests you most?"
+    ],
+    
+    nutrition: [
+        "Here are some quick nutrition tips for students:\n• Eat protein with every meal 🥚\n• Stay hydrated (8-10 glasses daily) 💧\n• Include fruits and vegetables 🥗\n• Avoid processed foods when possible\n• Consider our student-discounted supplements!\n\nNeed specific meal planning advice?",
+        "Nutrition is key to fitness success! As a student, focus on:\n• Budget-friendly protein sources (eggs, dal, chicken)\n• Complex carbs for energy\n• Healthy fats (nuts, avocado)\n• Our store has affordable supplements with 30% student discounts!"
+    ],
+    
+    workout: [
+        "I'd love to help you create a workout plan! Here's what I need to know:\n• Your fitness level (beginner/intermediate/advanced)\n• Available time per day\n• Equipment access\n• Primary goals (weight loss, muscle gain, endurance)\n\nOr I can connect you with one of our trainers for a personalized plan!",
+        "Great! Here's a simple student-friendly workout routine:\n**Monday/Wednesday/Friday:**\n• 20-30 min bodyweight exercises\n• Push-ups, squats, lunges, planks\n\n**Tuesday/Thursday:**\n• 30 min cardio (walking, jogging, dancing)\n\n**Weekend:**\n• Active recovery (yoga, stretching)\n\nWant a trainer to customize this for you?"
+    ],
+    
+    supplements: [
+        "Our student store offers amazing deals on quality supplements:\n🥛 **Whey Protein** - ₹1,899 (30% off)\n💊 **Multivitamins** - ₹649 (28% off)\n⚡ **Pre-workout** - ₹599 (33% off)\n🐟 **Fish Oil** - ₹439 (27% off)\n\nAll products are lab-tested and student-verified. Need recommendations based on your goals?",
+        "Smart choice! Supplements can boost your progress when combined with proper diet and exercise. For students, I recommend starting with:\n1. **Whey Protein** (post-workout recovery)\n2. **Multivitamin** (fill nutritional gaps)\n3. **Fish Oil** (heart and brain health)\n\nCheck our store for student discounts!"
+    ],
+    
+    default: [
+        "I'm here to help with fitness, nutrition, trainers, and supplements! Could you be more specific about what you'd like to know?",
+        "Great question! I specialize in fitness advice, trainer recommendations, workout plans, and supplement guidance. What specific area interests you?",
+        "I'd love to help! Try asking me about:\n• Finding trainers\n• Workout routines\n• Nutrition tips\n• Supplement recommendations\n• Student discounts"
+    ]
+};
+
+function toggleChatbot() {
+    const chatbot = document.getElementById('chatbot');
+    chatbotMinimized = !chatbotMinimized;
+    
+    if (chatbotMinimized) {
+        chatbot.classList.add('minimized');
+    } else {
+        chatbot.classList.remove('minimized');
+    }
+}
+
+function sendMessage() {
+    const input = document.getElementById('chatbotInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    addMessage(message, 'user');
+    
+    // Clear input
+    input.value = '';
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    // Generate bot response after delay
+    setTimeout(() => {
+        const response = generateBotResponse(message);
+        removeTypingIndicator();
+        addMessage(response, 'bot');
+    }, 1500);
+}
+
+function quickMessage(message) {
+    document.getElementById('chatbotInput').value = message;
+    sendMessage();
+}
+
+function addMessage(content, sender) {
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const messageDiv = document.createElement('div');
+    
+    const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    messageDiv.className = `message ${sender}-message`;
+    messageDiv.innerHTML = `
+        <div class="message-avatar">${sender === 'bot' ? '🤖' : '👤'}</div>
+        <div class="message-content">
+            <p>${content.replace(/\n/g, '<br>')}</p>
+        </div>
+        <span class="message-time">${time}</span>
+    `;
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showTypingIndicator() {
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const typingDiv = document.createElement('div');
+    typingDiv.id = 'typing-indicator';
+    typingDiv.className = 'message bot-message';
+    typingDiv.innerHTML = `
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+            <p>Typing... <span class="typing-dots">●●●</span></p>
+        </div>
+    `;
+    
+    messagesContainer.appendChild(typingDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typingIndicator = document.getElementById('typing-indicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+function generateBotResponse(userMessage) {
+    const message = userMessage.toLowerCase();
+    
+    // Determine response category
+    if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+        return getRandomResponse('greetings');
+    } else if (message.includes('trainer') || message.includes('coach') || message.includes('instructor')) {
+        return getRandomResponse('trainers');
+    } else if (message.includes('nutrition') || message.includes('diet') || message.includes('food') || message.includes('meal')) {
+        return getRandomResponse('nutrition');
+    } else if (message.includes('workout') || message.includes('exercise') || message.includes('routine') || message.includes('plan')) {
+        return getRandomResponse('workout');
+    } else if (message.includes('supplement') || message.includes('protein') || message.includes('vitamin') || message.includes('store')) {
+        return getRandomResponse('supplements');
+    } else {
+        return getRandomResponse('default');
+    }
+}
+
+function getRandomResponse(category) {
+    const responses = chatbotResponses[category];
+    return responses[Math.floor(Math.random() * responses.length)];
+}
+
+// Enter key support for chatbot
+document.addEventListener('DOMContentLoaded', function() {
+    const chatbotInput = document.getElementById('chatbotInput');
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+});
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js').then((reg) => {
+    reg.onupdatefound = () => {
+      const newWorker = reg.installing;
+      newWorker.onstatechange = () => {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          console.log('🔁 New version detected — reloading for latest content...');
+          window.location.reload();
+        }
+      };
+    };
+  }).catch(err => console.error('Service Worker registration failed:', err));
+}
+

@@ -200,6 +200,49 @@
         });
     </script>
 
+    <!-- Chatbot Interface -->
+<div id="chatbot" class="chatbot-container">
+    <div class="chatbot-header" onclick="toggleChatbot()">
+        <div class="chatbot-avatar">🤖</div>
+        <div class="chatbot-info">
+            <h4>FitBot Assistant</h4>
+            <span class="chatbot-status">Online • Ready to help</span>
+        </div>
+        <div class="chatbot-toggle">💬</div>
+    </div>
+    
+    <div class="chatbot-messages" id="chatbotMessages">
+        <div class="message bot-message">
+            <div class="message-avatar">🤖</div>
+            <div class="message-content">
+                <p>Hi! I'm FitBot, your personal fitness assistant. I can help you with:</p>
+                <ul>
+                    <li>🏋️ Workout recommendations</li>
+                    <li>🥗 Nutrition advice</li>
+                    <li>💊 Supplement suggestions</li>
+                    <li>📅 Trainer booking assistance</li>
+                </ul>
+                <p>How can I help you today?</p>
+            </div>
+            <span class="message-time">Now</span>
+        </div>
+    </div>
+    
+    <div class="chatbot-input">
+        <input type="text" id="chatbotInput" placeholder="Ask me about fitness, nutrition, or trainers...">
+        <button onclick="sendMessage()" id="sendBtn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+    
+    <div class="quick-actions">
+        <button class="quick-btn" onclick="quickMessage('Find me a trainer')">Find Trainer</button>
+        <button class="quick-btn" onclick="quickMessage('Workout plan')">Workout Plan</button>
+        <button class="quick-btn" onclick="quickMessage('Nutrition tips')">Nutrition</button>
+    </div>
+</div>
+
+
 </body>
 
 </html>
