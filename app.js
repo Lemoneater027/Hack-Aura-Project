@@ -421,6 +421,7 @@ function createTrainerCard(trainer) {
                 <div class="trainer-actions">
                     <button class="btn btn-primary" onclick="bookTrainer(${trainer.id})">Book Session</button>
                     <button class="btn btn-secondary" onclick="viewTrainer(${trainer.id})">View Profile</button>
+                    <button class="btn btn-tertary" onclick="chatTrainer(${trainer.id})">Chat</button>
                 </div>
             </div>
         </div>
