@@ -1,85 +1,90 @@
-// FitTrainer Hub - Service Worker for Multi-Page PWA
+// FitTrainer Hub - Full Multi-Page Service Worker (with per-page CSS auto update)
 
-const CACHE_NAME = 'fittrainer-hub-v1';
-const FILES_TO_CACHE = [
+const CACHE_NAME = 'fittrainer-hub-v4'; // bump only if you change SW logic
+const CORE_FILES = [
   '/',
   '/index.html',
-  '/trainers.html',
-  '/store.html',
-  '/social.html',
-  '/dashboard.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json'
+  '/manifest.json',
+  '/js/app.js'
 ];
 
-// Install - cache all pages
+// Install - cache core files
 self.addEventListener('install', (event) => {
-  console.log('🔧 Service Worker installing...');
-  
+  console.log('🔧 Installing Service Worker...');
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('📦 Caching all pages');
-        return cache.addAll(FILES_TO_CACHE);
-      })
-      .then(() => {
-        console.log('✅ All pages cached successfully');
-        return self.skipWaiting();
-      })
+      .then((cache) => cache.addAll(CORE_FILES))
+      .then(() => self.skipWaiting())
   );
 });
 
-// Activate - clean up old caches
+// Activate - clear old caches
 self.addEventListener('activate', (event) => {
-  console.log('🚀 Service Worker activating...');
-  
+  console.log('🚀 Activating new Service Worker...');
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('🗑️ Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
+    caches.keys().then((names) =>
+      Promise.all(
+        names.map((name) => {
+          if (name !== CACHE_NAME) {
+            console.log('🗑️ Removing old cache:', name);
+            return caches.delete(name);
           }
         })
-      );
-    }).then(() => {
-      console.log('✅ Service Worker activated');
-      return self.clients.claim();
-    })
+      )
+    ).then(() => self.clients.claim())
   );
 });
 
-// Fetch - serve from cache when offline
+// Fetch - smart handling for HTML, CSS, JS, images
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      })
-      .catch(() => {
-        // If both cache and network fail
-        if (event.request.mode === 'navigate') {
-          // For navigation requests, try to serve appropriate cached page
-          const url = new URL(event.request.url);
-          const pathname = url.pathname;
-          
-          if (pathname.includes('trainers')) {
-            return caches.match('/trainers.html');
-          } else if (pathname.includes('store')) {
-            return caches.match('/store.html');
-          } else if (pathname.includes('social')) {
-            return caches.match('/social.html');
-          } else if (pathname.includes('dashboard')) {
-            return caches.match('/dashboard.html');
-          } else {
-            return caches.match('/index.html');
-          }
-        }
-      })
-  );
+  const req = event.request;
+  if (req.method !== 'GET') return;
+
+  const url = new URL(req.url);
+
+  // 🔹 HTML files → network first (for latest structure)
+  if (req.destination === 'document') {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const resClone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+          return res;
+        })
+        .catch(() => caches.match(req).then(r => r || caches.match('/index.html')))
+    );
+    return;
+  }
+
+  // 🔹 CSS & JS files → network first (for instant updates)
+  if (req.destination === 'style' || req.destination === 'script') {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const resClone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+          return res;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // 🔹 Images → cache first, fallback to network
+  if (req.destination === 'image') {
+    event.respondWith(
+      caches.match(req)
+        .then((cached) => cached || fetch(req).then((res) => {
+          const resClone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+          return res;
+        }))
+    );
+    return;
+  }
+
+  // Default → network fallback to cache
+  event.respondWith(fetch(req).catch(() => caches.match(req)));
 });
 
-console.log('✅ Multi-page Service Worker loaded');
+console.log('✅ Multi-CSS Service Worker ready');
