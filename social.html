@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Community - FitTrainer Hub</title>
-    
+
     <!-- Load CSS files -->
     <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/social.css">
-    
+
     <meta name="theme-color" content="#218085">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -16,7 +17,9 @@
 <body>
     <!-- Navbar -->
     <nav>
-        <div class="logo">FitTrainer Hub</div>
+        <div class="logo">
+            <img src="Fitrovert-removebg-preview.png" alt="bg image">
+            Fitrovert</div>
         <div class="nav-links" id="navLinks">
             <a href="index.html">Home</a>
             <a href="trainers.html">Trainers</a>
@@ -40,7 +43,6 @@
         </div>
     </nav>
 
-
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="mobile-menu hidden">
         <a href="index.html" class="nav-item">🏠 Home</a>
@@ -50,33 +52,76 @@
         <a href="dashboard.html" class="nav-item">👤 Dashboard</a>
     </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <div class="page-header">
-                <h1>Fitness Community</h1>
-                <p>Share your journey and get inspired by others</p>
-                <button class="btn btn-primary" onclick="showModal('post')">Share Your Progress</button>
+   <main class="main-content">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Social Feed</h1>
+            <p class="subtitle">Share your fitness journey and get inspired by others</p>
+
+            <!-- Tab Navigation as Pills -->
+            <div class="tabs-wrapper">
+                <ul class="nav-tabs">
+                    <li class="nav-tab active">For You</li>
+                    <li class="nav-tab">Following</li>
+                    <li class="nav-tab">Trending</li>
+                    <li class="nav-tab">Workouts</li>
+                </ul>
             </div>
 
-            <!-- Social Feed -->
-            <div class="social-feed" id="socialFeed">
-                <!-- Posts loaded by JavaScript -->
+            <!-- Optional: Quick Post Button -->
+            <div class="post-btn-wrapper">
+                <button class="btn btn-primary" onclick="showModal('post')">
+                    + Share Your Progress
+                </button>
             </div>
         </div>
-    </main>
 
-    <!-- Include shared components -->
-    <div id="sharedComponents"></div>
+        <!-- Social Feed -->
+        <div class="social-feed" id="socialFeed">
+            <!-- Posts will be loaded dynamically -->
+        </div>
+    </div>
+</main>
+       <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>FitTrainer Hub</h3>
+                <p>Your one-stop platform to connect with certified trainers, join fitness communities, 
+                   and access the best health & wellness resources.</p>
+            </div>
 
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trainers.html">Trainers</a></li>
+                    <li><a href="social.html">Social</a></li>
+                    <li><a href="store.html">Store</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Email: support@fittrainerhub.com</p>
+                <p>Phone: +91 9394970150</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FitTrainer Hub. All Rights Reserved.</p>
+        </div>
+    </footer>
     <!-- Scripts -->
     <script src="app.js"></script>
     <script>
         // Page-specific initialization
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initializeSharedComponents();
             loadSocialFeed();
         });
     </script>
 </body>
+
 </html>

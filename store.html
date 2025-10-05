@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Store - FitTrainer Hub</title>
-    
+
     <!-- Load CSS files -->
     <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/store.css">
-    
+
     <meta name="theme-color" content="#218085">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -16,7 +17,9 @@
 <body>
     <!-- Navbar -->
     <nav>
-        <div class="logo">FitTrainer Hub</div>
+        <div class="logo">
+            <img src="Fitrovert-removebg-preview.png" alt="bg image">
+            Fitrovert</div>
         <div class="nav-links" id="navLinks">
             <a href="index.html">Home</a>
             <a href="trainers.html">Trainers</a>
@@ -40,7 +43,6 @@
         </div>
     </nav>
 
-
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="mobile-menu hidden">
         <a href="index.html" class="nav-item">🏠 Home</a>
@@ -61,15 +63,13 @@
                     <span>Free shipping on orders above ₹999</span>
                 </div>
             </div>
-
-            <!-- Store Categories -->
-            <div class="store-categories">
-                <button class="category-btn active" onclick="filterProducts('all')">All Products</button>
-                <button class="category-btn" onclick="filterProducts('protein')">Protein</button>
-                <button class="category-btn" onclick="filterProducts('vitamins')">Vitamins</button>
-                <button class="category-btn" onclick="filterProducts('pre-workout')">Pre-workout</button>
-                <button class="category-btn" onclick="filterProducts('recovery')">Recovery</button>
-                <button class="category-btn" onclick="filterProducts('health')">Health</button>
+            <div class="search-filter">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1116.65 16.65z" />
+                </svg>
+                <input type="text" placeholder="Search products...">
             </div>
 
             <!-- Products Grid -->
@@ -78,18 +78,62 @@
             </div>
         </div>
     </main>
+       <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>FitTrainer Hub</h3>
+                <p>Your one-stop platform to connect with certified trainers, join fitness communities, 
+                   and access the best health & wellness resources.</p>
+            </div>
 
-    <!-- Include shared components -->
-    <div id="sharedComponents"></div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trainers.html">Trainers</a></li>
+                    <li><a href="social.html">Social</a></li>
+                    <li><a href="store.html">Store</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
 
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Email: support@fittrainerhub.com</p>
+                <p>Phone: +91 9394970150</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FitTrainer Hub. All Rights Reserved.</p>
+        </div>
+    </footer>
     <!-- Scripts -->
     <script src="app.js"></script>
     <script>
         // Page-specific initialization
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initializeSharedComponents();
             loadProducts();
         });
+
+        // Search function
+        function searchProducts() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let products = document.querySelectorAll(".product-card");
+
+            products.forEach(product => {
+                let name = product.querySelector("h3")?.innerText.toLowerCase() || "";
+                let desc = product.querySelector("p")?.innerText.toLowerCase() || "";
+
+                if (name.includes(input) || desc.includes(input)) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
     </script>
 </body>
+
 </html>
