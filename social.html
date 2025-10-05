@@ -19,7 +19,8 @@
     <nav>
         <div class="logo">
             <img src="Fitrovert-removebg-preview.png" alt="bg image">
-            Fitrovert</div>
+            Fitrovert
+        </div>
         <div class="nav-links" id="navLinks">
             <a href="index.html">Home</a>
             <a href="trainers.html">Trainers</a>
@@ -32,9 +33,8 @@
                 <span class="bell-icon">🔔</span>
                 <span class="notification-count">2</span>
             </div>
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face"
-                alt="Profile" class="profile-avatar">
-            <span class="profile-name">Alex</span>
+            <img src="varunpfp.jpg" alt="Profile" class="profile-avatar">
+            <span class="profile-name">Varun Dhawan</span>
         </div>
         <div class="hamburger" id="hamburger">
             <div></div>
@@ -52,44 +52,61 @@
         <a href="dashboard.html" class="nav-item">👤 Dashboard</a>
     </div>
 
-   <main class="main-content">
-    <div class="container">
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1>Social Feed</h1>
-            <p class="subtitle">Share your fitness journey and get inspired by others</p>
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Social Feed</h1>
+                <p class="subtitle">Share your fitness journey and get inspired by others</p>
 
-            <!-- Tab Navigation as Pills -->
-            <div class="tabs-wrapper">
-                <ul class="nav-tabs">
-                    <li class="nav-tab active">For You</li>
-                    <li class="nav-tab">Following</li>
-                    <li class="nav-tab">Trending</li>
-                    <li class="nav-tab">Workouts</li>
-                </ul>
-            </div>
+                <!-- Tab Navigation as Pills -->
+                <div class="tabs-wrapper">
+                    <button class="tab-btn active" onclick="showTab('For you')">For you</button>
+                    <button class="tab-btn" onclick="showTab('Following')">Following</button>
+                    <button class="tab-btn" onclick="showTab('Trending')">Trending</button>
+                    <button class="tab-btn" onclick="showTab('Workouts')">Workouts</button>
+                </div>
 
-            <!-- Optional: Quick Post Button -->
-            <div class="post-btn-wrapper">
-                <button class="btn btn-primary" onclick="showModal('post')">
-                    + Share Your Progress
-                </button>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="post-create">
+                            <img src="varunpfp.jpg" alt="Avatar" class="avatar">
+
+                            <div class="post-area">
+                                <textarea placeholder="Share your fitness journey..." class="post-input"></textarea>
+
+                                <div class="post-actions">
+                                    <div class="action-buttons">
+                                        <button class="btn-ghost">
+                                            📷 Photo
+                                        </button>
+                                        <button class="btn-ghost">
+                                            🎯 Workout
+                                        </button>
+                                        <button class="btn-ghost">
+                                            📍 Location
+                                        </button>
+                                    </div>
+                                    <button class="btn-share">Share</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Social Feed -->
+            <div class="social-feed" id="socialFeed">
+                <!-- Posts will be loaded dynamically -->
             </div>
         </div>
-
-        <!-- Social Feed -->
-        <div class="social-feed" id="socialFeed">
-            <!-- Posts will be loaded dynamically -->
-        </div>
-    </div>
-</main>
-       <!-- Footer Section -->
+    </main>
+    <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-about">
                 <h3>FitTrainer Hub</h3>
-                <p>Your one-stop platform to connect with certified trainers, join fitness communities, 
-                   and access the best health & wellness resources.</p>
+                <p>Your one-stop platform to connect with certified trainers, join fitness communities,
+                    and access the best health & wellness resources.</p>
             </div>
 
             <div class="footer-links">
